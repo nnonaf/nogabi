@@ -7,14 +7,14 @@ class Bootstrap extends Data_center {
 
     public function __construct() {
 
-         print_r($GLOBALS);
+        //  print_r($GLOBALS);
         
         //CHECKING FOR SECURITY OF URL PASSED
         $url = $this->https_security($this->urlParse());
 
          if(isset($url[0])){
 
-            if(file_exists("app/controller/".$url[0].".php")) {
+            if(file_exists("app/controllers/".$url[0].".php")) {
                 $this->controller = $url[0];
                 unset($url[0]);
             }
@@ -23,7 +23,7 @@ class Bootstrap extends Data_center {
 
 
          //REQUIRING THE PAGE
-         require "app/controller/".$this->controller.".php";
+         require "app/controllers/".$this->controller.".php";
          $this->controller = new $this->controller;
          //CHECKING IF  METHOD IS EXITING
          

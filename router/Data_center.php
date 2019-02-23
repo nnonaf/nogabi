@@ -4,13 +4,24 @@ class Data_center{
    protected $router = [];
 
     public function __construct() {
-     $this->pen = [];
+    
    
   }
 
 
-  public function routs($url,$root,$a){    
-    array_push($this->router,$root);
+  public function routs($url,$root){ 
+     //CHECK IF THE INPUT IS CORRECT
+
+
+
+    //CHECK IF URL IS ALREADY IN USE
+
+
+    //SET THE URL AS GLOBAL
+    
+    
+
+  
     $GLOBALS[$url] = $root; 
     
   
@@ -19,7 +30,7 @@ class Data_center{
 
  public  function router_settings(){
    
-   return $this->router;
+ 
 
     
 

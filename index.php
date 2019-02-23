@@ -1,7 +1,7 @@
 <?php
  define("BASEURL", 1);
 
- require "app/init.php";
+ require "config/init.php";
  
  $app = new Bootstrap;
 
