@@ -1,49 +1,36 @@
 <?php
-class Bootstrap extends Data_center {
-    private $controller = "Error_page";
+class Bootstrap {
+    private $controller = "Home";
     private $method     = "index";
     private $params     = array();
+    private $base_url   = true;
    
 
     public function __construct() {
 
-        //  print_r($GLOBALS);
+        //GET URL
+        //CHECK IF IT IS FALSE AND SEND RESULT TO ERROR PAGE.
+        //GET THE RETURN URL AND CALL THE PAGE
         
-        //CHECKING FOR SECURITY OF URL PASSED
-        $url = $this->https_security($this->urlParse());
+        
+        $route = $this->urlParse();
+        
+       
+        
+        if($route !== false){
+            $this->base_url = false;
+            $this->controller = $route["controller"];
+            $this->method = $route["method"];
 
-         if(isset($url[0])){
-
-            if(file_exists("app/controllers/".$url[0].".php")) {
-                $this->controller = $url[0];
-                unset($url[0]);
-            }
-
-         }
-
-
+        }     
+       
          //REQUIRING THE PAGE
-         require "app/controllers/".$this->controller.".php";
-         $this->controller = new $this->controller;
-         //CHECKING IF  METHOD IS EXITING
-         
-        if (isset($url[1])) {
-            if (method_exists($this->controller, $url[1])) {
-                $this->method = $url[1];
-                unset($url[1]);
-            }
-        }
-
-
+         require_once "app/controllers/".$this->controller.".php";
+         $this->controller = new $this->controller; 
         //SETTING UP DATA FOR PARAMETER
-        $this->params = $url ? array_values($url) : array();
+        $this->params = $this->getParameters() ? array_values($this->getParameters()) : array();
         call_user_func_array(array($this->controller, $this->method), $this->params);
-
-        unset($url);
-
-
-
-
+        // call_user_func_array(array($this->controller, $this->method),array_values($this->getParameters()));
     }
 
 
@@ -51,10 +38,45 @@ class Bootstrap extends Data_center {
 
 
     private function urlParse() {
+        $base_url = " ";
         if (isset($_GET["url"])) {
-             return (explode("/", filter_var(rtrim($_GET["url"], "/"), FILTER_SANITIZE_URL)));
+             $url= explode("/", filter_var(rtrim($_GET["url"], "/"), FILTER_SANITIZE_URL));
         }
+
+        if(empty($url)){
+            $base_url = "/";
+         
+
+        }else {
+            $base_url = $url[0];
+        }
+         
+        foreach($GLOBALS["route_url"] as $key => $value){
+            if( explode("/",$key)[1] ==   $base_url) return  $value;
+            if( $key ==  $base_url) return  $value;
+           
+        }
+
+
+        return false;
+
+
        
+       
+     }
+
+     private function getParameters(){
+     
+       if(isset($_GET["url"]) &&  $this->base_url == true ){
+          return  explode("/", filter_var(rtrim($_GET["url"], "/"), FILTER_SANITIZE_URL));
+       }elseif (isset($_GET["url"])) {
+        $url= explode("/", filter_var(rtrim($_GET["url"], "/"), FILTER_SANITIZE_URL));
+           unset($url[0]);
+            return $url;
+       }else {
+        return [];
+       }
+
      }
 
 

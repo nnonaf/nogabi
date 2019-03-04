@@ -1,8 +1,8 @@
 <?php
- define("BASEURL", 1);
 
  require "config/init.php";
- 
+ new Core();
+
  $app = new Bootstrap;
 
 ?>

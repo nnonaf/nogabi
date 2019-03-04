@@ -8,9 +8,15 @@
 
    }
 
-   public function index(){
+   public function index($check ){
+     print_r($check);
 
-     echo " am index";
+    //  echo " am index";
+   }
+
+   public function get(){
+
+     echo " Am getting u";
    }
 
  }

@@ -8,7 +8,7 @@ RewriteBase /event/index.php
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
-SetEnv HTTP_MY_VARIABLE ".env"
+
 
 ErrorDocument 400 /event/public/error/400error.html
 ErrorDocument 401 /event/public/error/401error.html

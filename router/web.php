@@ -1,6 +1,10 @@
 <?php
- Route::get('/','UserController@');
- Route::post()
+ Route::get('/','Home@',true);
+ Route::get('/home','Home@index',false);
+
+ 
+
+//  Route::post()
 
 
 
