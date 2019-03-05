@@ -1,7 +1,8 @@
 <?php
 
  require "config/init.php";
- new Core();
+ //db
+new Core();
 
  $app = new Bootstrap;
 

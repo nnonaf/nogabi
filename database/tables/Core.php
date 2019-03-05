@@ -1,5 +1,8 @@
 <?php
+//requiring of table file
 require "User.php";
+
+
 class  Core extends Db_connect
 {
 

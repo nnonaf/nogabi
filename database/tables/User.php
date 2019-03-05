@@ -1,13 +1,14 @@
 <?php
 
 class User
-
 {
-
      function __construct($connected){
-         print_r($connected);
 
          try {
+
+              //checking if table exit;
+             if(Db::TableExit("user",$connected) === true) return ;
+             
               //CREATING OF TABLE
 
               $sql = "CREATE TABLE user (

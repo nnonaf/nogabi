@@ -1,22 +1,21 @@
 <?php 
- class  Home
+ class  Home  extends Controller
  {
      
    function __construct(){
 
-
+    parent::__construct();
 
    }
 
-   public function index($check ){
-     print_r($check);
-
+   public function index(){
+ 
     //  echo " am index";
    }
 
    public function get(){
 
-     echo " Am getting u";
+    $this->view->render("welcome.php");
    }
 
  }
