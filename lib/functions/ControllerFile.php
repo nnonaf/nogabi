@@ -24,8 +24,9 @@
 
     private function createFile($fileName){
        $myfile = fopen("app/controllers/".$fileName.".php", "w") or die("Unable to open file!");
-
-        $txt =
+         $modelName = $fileName."Model";
+         $callModel = "$ this->$modelName = $ this->model->load('$fileName')";
+        $txt = 
         
 "<?php
 
@@ -34,6 +35,9 @@
       
       function __construct(){
         parent::__construct();
+        $callModel;
+        //delete space between $ and this
+       
 
       }
   

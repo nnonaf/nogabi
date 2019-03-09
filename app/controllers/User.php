@@ -5,6 +5,9 @@
       
       function __construct(){
         parent::__construct();
+        $this->UserModel = $this->model->load('User');
+        //delete space between $ and this
+       
 
       }
   

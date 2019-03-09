@@ -2,7 +2,7 @@
 
  require "config/init.php";
  //db
-new Core();
+  new Core();
 
  $app = new Bootstrap;
 
